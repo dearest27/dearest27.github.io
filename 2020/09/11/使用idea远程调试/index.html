@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="John Doe"><meta name="renderer" content="webkit"><meta name="copyright" content="John Doe"><meta name="keywords" content="Hexo"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>使用idea远程调试 · Dearest's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/favicon.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/cat.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">dearest</div><div class="profile-signature">for me</div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">Dearest's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">使用idea远程调试</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-09-11</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h2 id="使用idea远程调试"><a href="#使用idea远程调试" class="headerlink" title="使用idea远程调试"></a>使用idea远程调试</h2><p><strong>配置本地参数</strong></p>
+<p>打开IDEA的 “Run/Debug Configurations” 选项，配置远程服务器的IP和端口，如下</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gimgsuiyjwj30ox0ivdhb.jpg" alt=""></p>
+<p>红框中的内容暂时不用管，下一步才会用到</p>
+<p>在绿框中的第一个输入框中输入远程服务器的ip，第二个输入框中输入远程服务器的端口</p>
+<p><strong>配置远程服务器参数</strong></p>
+<p>登录远程服务器，打开tomcat的bin文件夹下catalina.sh的文件进行编辑，加入如下配置</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_OPTS&#x3D;&#39;-agentlib:jdwp&#x3D;transport&#x3D;dt_socket,server&#x3D;y,suspend&#x3D;n,address&#x3D;8185&#39;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>以上配置的等号后面的参数来自于第一步红框中的内容。</p>
+<ul>
+<li>大多数情况下，使用红框中的第一个输入框的内容作为参数</li>
+<li>如果远程服务器上的jdk是1.4版本的，则使用红框中的第二个输入框的内容作为参数</li>
+<li>如果远程服务器上的jdk是1.3版本的，则使用红框中的第三个输入框的内容作为参数</li>
+</ul>
+<p><strong>调 试</strong></p>
+<p>启动第一步配置好的IDEA服务，在要调试的代码上打上断点，当远程服务器上的程序被访问时就会进入到断点中，这时就可以愉快的调试了</p>
+<p>启动IDEA服务点击如下按钮</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gimgrtdsh5j309c01v748.jpg" alt="img"></p>
+<p>IDEA启动成功后，控制台输出如下内容</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gimgrt3hqmj30u0036q3j.jpg" alt="img"></p>
+<p><strong>参数解释</strong></p>
+<p>下图是第一步配置时的截图，我们来逐一解释以下各个参数的含义</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gimgrucq59j30ot0iz3zx.jpg" alt="img"></p>
+<p>先说绿框中的参数</p>
+<ul>
+<li>Transport是IDEA和远程服务器的通讯方式，如果远程服务器是linux或macos则选择socket，如果远程服务器是windows则选择Shared memory</li>
+<li>Debugger mode的可选项有Attach和Listen。Attach表示服务端启动后等待IDEA去连接；Listen表示IDEA监听服务端的端口，等服务端准备好时会建立连接，此种方式要求服务端能ping通本地电脑的ip。通常使用Attach模式</li>
+<li>Host是远程服务器的ip，Port是远程服务器的端口</li>
+</ul>
+<p>再说红框中的参数</p>
+<ul>
+<li>红框中的参数不允许手动修改，它跟着绿框中参数的修改而发生变化。</li>
+<li>-Xrunjdwp：通知JVM使用jdwp（java debug wire protocol）来运行服务器代码</li>
+<li>transport的值可选dt_socket和dt_shmem，分别对应绿框中的Socket和Shared memory</li>
+<li>address对应绿框中的Port，是远程服务器的端口</li>
+</ul>
+<p><strong>注意事项</strong></p>
+<ol>
+<li><p>远程服务器上的端口必须没有被占用，并且可以被本地访问到，可以通过telnet测试，如：telnet 远程ip 远程端口</p>
+</li>
+<li><p>远程服务器上部署的代码必须和本地的源代码保持一致，否则断点无法进入</p>
+</li>
+<li><p>配置远程服务器时，如果JAVA_OPTS参数在catalina.sh中已经存在，则只需要把要配置的参数追加到后面就行</p>
+</li>
+</ol>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">John Doe</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/09/11/%E4%BD%BF%E7%94%A8idea%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">http://yoursite.com/2020/09/11/%E4%BD%BF%E7%94%A8idea%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2020/08/10/%E9%9D%A2%E8%AF%95/" title="面试"><span>NextPost ></span><br><span class="nextTitle">面试</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用idea远程调试"><span class="toc-number">1.</span> <span class="toc-text">使用idea远程调试</span></a></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>

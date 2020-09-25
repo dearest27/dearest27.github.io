@@ -97,7 +97,15 @@
   }
 }( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/cat.png"></div><!--.profile-saying
   i.fa.fa-comment
-  .saying--><div class="cxo-profile-inner"><div class="profile-name">dearest</div><div class="profile-signature">for me</div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">Dearest's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a></div></i><div class="clear"></div></section></nav><h1>Dearest's Blog</h1><h5>Welcome to my Blog!</h5><div class="intro-social"><a class="fa fa-github" href="//github.com/" target="_blank" title="github"></a><a class="fa fa-weibo" href="//www.weibo.com" target="_blank" title="weibo"></a><a class="fa fa-facebook" href="//www.facebook.com" target="_blank" title="facebook"></a><a class="fa fa-twitter" href="//twitter.com" target="_blank" title="twitter"></a><a class="fa fa-rss" href="/atom.xml" target="_blank" title="rss"></a></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><section id="recent-posts"><div class="recent-post-item"><div class="post-title"><a href="/2020/09/25/java%E6%BA%90%E7%A0%81/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">java源码/Java源码阅读-阅读环境搭建</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-09-25T03:53:24.862Z">2020-09-25</time></div><div class="recent-post-content">Java源码阅读-阅读环境搭建
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">dearest</div><div class="profile-signature">for me</div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">Dearest's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a></div></i><div class="clear"></div></section></nav><h1>Dearest's Blog</h1><h5>Welcome to my Blog!</h5><div class="intro-social"><a class="fa fa-github" href="//github.com/" target="_blank" title="github"></a><a class="fa fa-weibo" href="//www.weibo.com" target="_blank" title="weibo"></a><a class="fa fa-facebook" href="//www.facebook.com" target="_blank" title="facebook"></a><a class="fa fa-twitter" href="//twitter.com" target="_blank" title="twitter"></a><a class="fa fa-rss" href="/atom.xml" target="_blank" title="rss"></a></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><section id="recent-posts"><div class="recent-post-item"><div class="post-title"><a href="/2020/09/25/java%E6%BA%90%E7%A0%81/java.lang.Boolean/">java源码/java.lang.Boolean</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-09-25T09:09:19.775Z">2020-09-25</time></div><div class="recent-post-content">java.lang.Boolean
+public static boolean parseBoolean(String s)
+
+123public static boolean parseBoolean(String s) &#123;    return ((s != null) &amp;&amp; s.equalsIgnoreCase("true"));&#125;
+
+
+public static String toString(boolean b)并非是重写的toString方法
+
+123public static String toString(boolean b) &#123;   ...</div><div class="read-more"><a class="more" href="/2020/09/25/java%E6%BA%90%E7%A0%81/java.lang.Boolean/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/09/25/java%E6%BA%90%E7%A0%81/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">java源码/Java源码阅读-阅读环境搭建</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-09-25T03:53:24.862Z">2020-09-25</time></div><div class="recent-post-content">Java源码阅读-阅读环境搭建
 引用该帖子https://my.oschina.net/u/4315935/blog/4187486
 
 
@@ -171,21 +179,4 @@ boolean无明确规定，但是在jvm编译过程期间，将boolean转换成int
 http请求，如果使用的Content-Type为text/html时，需要注意在传输中文时的编码问题，能使用json则尽量使用json。
 hibernate中，实体类的属性，和数据库表结构字段命名不一致，需要在查到的数据中，将表数据as成和实体类中属性的命名保持一致，比如：
 
-12345678910111213-- 表结构create table test(  i ...</div><div class="read-more"><a class="more" href="/2020/07/03/tips/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/07/03/hexo%E5%91%BD%E4%BB%A4/">hexo命令</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-07-03T03:43:45.257Z">2020-07-03</time></div><div class="recent-post-content">hexo命令1.将本地数据发布到github上
-hexo g    -构建
-hexo d    -发布
-
-2. 配置文件
-{hexohome}/_config.yml中，
-
-​    如果想修改发布的github地址，则修改如下地方
-1234deploy:   type: git 发布类型  repo: https://github.com/dearest27/dearest27.github.io.git 发布的github地址  branch: master 发布到哪个节点
-
-
-
-
-
-
-
-
-如果想修改主题，则先从github上clone对应主题文件到{hexohome}/themes/目录 ...</div><div class="read-more"><a class="more" href="/2020/07/03/hexo%E5%91%BD%E4%BB%A4/#more">ReadMore</a></div><hr></div></section><nav class="cxo-page-nav"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &amp;#62;</a></nav></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
+12345678910111213-- 表结构create table test(  i ...</div><div class="read-more"><a class="more" href="/2020/07/03/tips/#more">ReadMore</a></div><hr></div></section><nav class="cxo-page-nav"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &amp;#62;</a></nav></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
